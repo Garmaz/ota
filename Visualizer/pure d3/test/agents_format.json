@@ -1,0 +1,18 @@
+// locations from a-z
+// time from 0-10
+// agents from 1-5
+
+{
+    "id": {
+        "busy": [{
+            "location": [],
+            "time": []
+        }],
+        "idle": [{
+            "location": [],
+            "time": []
+        }]
+
+
+    }
+}

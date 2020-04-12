@@ -1,0 +1,60 @@
+PROCESS:
+(long, lat, long, lat, dropoff time, pickup time)
+Obtain data for 29/4/2015 UTC (~420000 entries)
+Sample ~5000 data points
+Get time value, scale to 5 min : 0.1 units (0.3 units max delay in our exp)
+
+Obtain proxy of distance from Euclidean distance,
+Obtain proxy of duration using dropoff time - pickup time
+Calculate average velocity using average distance / average time,
+scale such that average velocity is 1 (follows our exp)
+
+-----
+
+Input for visualisation:
+1) request dataset:
+2) initial agents:
+3) assignment: (copy of agent id, request id) 
+
+assignments: { (ordered)
+	assignment:
+		request: {
+			id :
+			start:
+				x:
+				y:
+			end:
+				x:
+				y:
+			time: time the request is made
+		}
+		
+		agent: {
+			id:
+			velocity: 1
+			timeavailable: time when the agent finishes it's last request
+			lastlocation: the location at wicht the agent as been staying
+			start_time: time agent starts moving to req or the time that the agent is assigned to the request( assuming that the agent starts moving the moment it is assigned)
+		}
+
+		arrivetime: time agent starts moving to req + distance/(unit velocity)
+	}
+}
+
+numagents: 2400
+
+agents: {
+	agent: {
+			id:
+			location: ....
+			timeavailable: 
+	}
+}
+
+
+Feb 25
+Summary
+	one line file
+	Tab saperated
+	
+

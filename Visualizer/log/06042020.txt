@@ -1,0 +1,23 @@
+The visualizer cannot show idle workers
+Possible solutions:
+    1.New data structure that rembers all the workers' status
+        {
+            id:id
+            time:[s,e]
+            loc:[s,e]
+            status:status
+        }
+
+    2.Use current json file to find the status
+        curr_idle=[{id:[time,x,y]}]
+        for ass in those not overlapping{
+            id = ass.agent.id
+            if (curr_idle[id]){
+                if(curr_idle[id][0]<ass.finishtime){
+                    curr_idle[id] = [ass.finishtime,ass.request.end.x,ass.request.end.y]
+                }
+                else{
+                    curr_idle[id] = [ass.finishtime,ass.request.end.x,ass.request.end.y]
+                }
+            }
+        }

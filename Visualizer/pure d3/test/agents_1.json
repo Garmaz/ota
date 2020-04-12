@@ -1,0 +1,102 @@
+{
+    "1": 
+        [
+            {
+                "location": ["a","b"],
+                "time": [0,1],
+                "status":"busy"
+            },
+            {
+                "location":["b","e"],
+                "time":[2,5],
+                "status":"busy"
+            },
+            {
+                "location": ["e","g"],
+                "time": [7,9],
+                "status":"busy"
+            },
+            {
+            "location": ["b"],
+            "time": [1,2],
+            "status":"idle"
+            },
+            {
+                "location": ["e"],
+                "time": [5,7],
+                "status":"idle"
+            },
+            {
+                "location": ["g"],
+                "time": [9,10],
+                "status":"idle"
+            }
+        ],
+        "2": 
+        [
+            {
+                "location": ["c","b"],
+                "time": [0,3],
+                "status":"busy"
+            },
+            {
+                "location":["b","e"],
+                "time":[4,5],
+                "status":"busy"
+            },
+            {
+                "location": ["e","f"],
+                "time": [6,7],
+                "status":"busy"
+            },
+            {
+            "location": ["b"],
+            "time": [3,4],
+            "status":"idle"
+            },
+            {
+                "location": ["e"],
+                "time": [5,6],
+                "status":"idle"
+            },
+            {
+                "location": ["g"],
+                "time": [7,10],
+                "status":"idle"
+            }
+        ],
+        "3": 
+        [
+            {
+                "location": ["c","b"],
+                "time": [0,2],
+                "status":"busy"
+            },
+            {
+                "location":["b","e"],
+                "time":[3,5],
+                "status":"busy"
+            },
+            {
+                "location": ["e","f"],
+                "time": [6,7],
+                "status":"busy"
+            },
+            {
+            "location": ["b"],
+            "time": [2,3],
+            "status":"idle"
+            },
+            {
+                "location": ["e"],
+                "time": [5,8],
+                "status":"idle"
+            },
+            {
+                "location": ["g"],
+                "time": [8,10],
+                "status":"idle"
+            }
+        ]
+
+}

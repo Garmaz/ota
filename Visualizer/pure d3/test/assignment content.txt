@@ -1,0 +1,32 @@
+assignments: { (ordered)
+	assignment:
+		request: {
+			id :
+			start:
+				x:
+				y:
+			end:
+				x:
+				y:
+
+			time: time the request is made
+		}
+		
+		agent: {
+			id:
+
+			velocity: 1
+
+			timeavailable: time when the agent finishes it's last request ( the finish_time of last assignment? )
+
+			lastlocation: the location at wicht the agent as been staying ( the end location of last request by assumption)
+
+			start_time: time an agent starts moving to req or the time when the agent is assigned to the request( assuming that the agent starts moving the moment it is assigned)
+
+		}
+
+		arrivetime: time agent starts moving to req + distance/(unit velocity)
+
+		finish_time: time when this task is completed
+	}
+}

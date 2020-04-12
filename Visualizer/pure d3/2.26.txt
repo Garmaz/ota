@@ -1,0 +1,11 @@
+
+
+keep track of delay
+
+plot the distribution
+
+ignore some of the queries thats too bad
+
+
+
+

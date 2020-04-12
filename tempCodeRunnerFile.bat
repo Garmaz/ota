@@ -1,0 +1,1 @@
+axD 2.0 --incrMaxD 0.1 --dimX 2 --dimY 2 --seed 20 --logLevel info

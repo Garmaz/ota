@@ -1,19 +1,53 @@
 import argparse
+from datetime import datetime as dt
+from os import mkdir
+
+import numpy as np
+import copy
+import time
 
 from ota_io import extractRequests
 from ota_io import JsonAssignmentWriter
+from ota_io import CsvDelayWriter
+from ota_io import DelayPloter
+from ota_io import Results
+from ota_io import Logger
 
 from ota_strategy import getAllStrategies
+
 
 import ota_request_generation
 import ota_worker_generation
 
+
+
 def run(args):
-    jsonAssignmentWriter = JsonAssignmentWriter(args.assignmentsFile)
+    Start = time.time()
+    result_dir = "./exp/exp_"+\
+    str(dt.now().year)+"_"+\
+    str(dt.now().month)+"_"+\
+    str(dt.now().day)+"_"+\
+    str(dt.now().hour)+"h"+\
+    str(dt.now().minute)+"min"
+
     if args.expType == "real":
+        result_dir+="_"+args.expType+"_"+args.strategy+"/"
+        try:
+            mkdir(result_dir)
+        except:
+            pass
+        results = Results(result_dir+"realData_"+args.requestsFile+"_"+args.strategy+".csv")
+        logger = Logger(result_dir+"realData_"+args.requestsFile+"_"+args.strategy+".txt", args.logLevel, Start)
         requests = extractRequests(args.requestsFile)
         duration = (max(requests, key = lambda r : r.time)).time
     elif args.expType == "syn":
+        result_dir+="_"+args.expType+"_"+args.rdist+"_"+args.strategy+"/"
+        try:
+            mkdir(result_dir)
+        except:
+            pass
+        results = Results(result_dir+"synData_"+args.rdist+"_"+args.strategy+"_"+str(args.numRequests)+" requests_"+str(args.numWorkers)+" workers.csv")
+        logger = Logger(result_dir+"synData_"+args.rdist+"_"+args.strategy+"_"+str(args.numRequests)+" requests_"+str(args.numWorkers)+"workers.txt", args.logLevel, Start)
         if args.rdist == "unif":
             requests = ota_request_generation.generate_uniform(args.numRequests, args.duration,
                                                            args.seed + 1, args.dimX, args.dimY)
@@ -22,15 +56,42 @@ def run(args):
                                                            args.seed + 1, args.dimX, args.dimY)
         duration = args.duration
     else:
-        print("invalid expType")
+        logger.warning("exp type error")
+        logger.close()
+        results.close()
         return
 
     requests.sort(key=lambda r: r.time)
     workers = ota_worker_generation.generate_uniform(args.numWorkers, args.seed + 2, args.dimX, args.dimY)
     for strategy in getAllStrategies():
         if type(strategy).__name__ == args.strategy:
-            assignments = strategy.getAssignments(workers, requests, args.seed, args.maxD, args.dimX, args.dimY, args.duration)
-            jsonAssignmentWriter.write(assignments)
+            if args.strategy == "Greedy":
+                mD = 0
+                workersCopy = copy.deepcopy(workers)
+                assignments = strategy.getAssignments(workersCopy, requests, args.seed, mD, args.dimX, args.dimY, args.duration, logger, results)
+                jsonAssignmentWriter = JsonAssignmentWriter(result_dir+"Assignments_"+"threshold="+str(mD)+".json")
+                jsonAssignmentWriter.write(assignments[0])
+                csvDelayWriter = CsvDelayWriter(result_dir+"Assignments_"+"threshold="+str(mD)+".csv")
+                csvDelayWriter.write(assignments[1])
+                delayPloter = DelayPloter(result_dir+"Assignments_"+"threshold="+str(mD))
+                delayPloter.bar(assignments[1],mD)
+                delayPloter.hist(assignments[1],mD)
+            else:
+                for mD in np.arange(args.minMaxD, args.maxMaxD, args.incrMaxD):
+                    workersCopy = copy.deepcopy(workers)
+                    assignments = strategy.getAssignments(workersCopy, requests, args.seed, mD, args.dimX, args.dimY, args.duration, logger, results)
+                    jsonAssignmentWriter = JsonAssignmentWriter(result_dir+"Assignments_"+"threshold="+str(mD)+".json")
+                    jsonAssignmentWriter.write(assignments[0])
+                    csvDelayWriter = CsvDelayWriter(result_dir+"Assignments_"+"threshold="+str(mD)+".csv")
+                    csvDelayWriter.write(assignments[1])
+                    delayPloter = DelayPloter(result_dir+"Assignments_"+"threshold="+str(mD))
+                    delayPloter.bar(assignments[1],mD)
+                    delayPloter.hist(assignments[1],mD)
+    logger.Runtime()
+    logger.close()
+    results.close()
+    End = time.time()
+
 
 def main():
     parser = argparse.ArgumentParser()
@@ -65,7 +126,13 @@ def main():
         "--duration", help="time period of requests in synthetic dataset", required=False, type=float
     )
     parser.add_argument(
-        "--maxD", help="maximum delay parameter", required=True, type=float
+        "--minMaxD", help="minimum maximum delay parameter", required=True, type=float
+    )
+    parser.add_argument(
+        "--maxMaxD", help="maximum maximum delay parameter", required=True, type=float
+    )
+    parser.add_argument(
+        "--incrMaxD", help="increment of maximum delay parameter", required=True, type=float
     )
     parser.add_argument(
         "--dimX", help="maximum x coordinate for generating workers", required=True, type=float
@@ -80,7 +147,16 @@ def main():
         "--requestsFile", help="filename of input real request data", required=False, type=str
     )
     parser.add_argument(
-        "--assignmentsFile", help="filename of output assignments file", required=True, type=str
+        "--resultsFile", help="filename of output results file", required=False, type=str
+    )
+    parser.add_argument(
+        "--assignmentsFile", help="filename of output assignments file", required=False, type=str
+    )
+    parser.add_argument(
+        "--loggerFile", help="filename of output log file", required=False, type=str
+    )
+    parser.add_argument(
+        "--logLevel", help="intensity level of logging (fine, info, warning, off)", required=True, type=str
     )
     parser.add_argument(
         "--rdist", help="request distribution (peaks, unif)", required=False, type=str

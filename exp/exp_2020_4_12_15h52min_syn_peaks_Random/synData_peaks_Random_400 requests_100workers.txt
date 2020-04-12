@@ -1,0 +1,73 @@
+
+============================================
+Experiment: 100 workers, 400 requests, over duration 100.0 for max waiting time of 0.0 using strategy Random
+============================================
+Total requests: 400
+Total failed requests: 400
+Average waiting time: 0.2492611172813289
+Max waiting time: 1.382262759227809
+Constraint: 0.0
+
+============================================
+Experiment: 100 workers, 400 requests, over duration 100.0 for max waiting time of 0.2 using strategy Random
+============================================
+Total requests: 400
+Total failed requests: 147
+Average waiting time: 0.27007827001452256
+Max waiting time: 1.397384465396007
+Constraint: 0.2
+
+============================================
+Experiment: 100 workers, 400 requests, over duration 100.0 for max waiting time of 0.4 using strategy Random
+============================================
+Total requests: 400
+Total failed requests: 71
+Average waiting time: 0.3428607845672635
+Max waiting time: 1.3432861542831742
+Constraint: 0.4
+
+============================================
+Experiment: 100 workers, 400 requests, over duration 100.0 for max waiting time of 0.6000000000000001 using strategy Random
+============================================
+Total requests: 400
+Total failed requests: 37
+Average waiting time: 0.44606017416504784
+Max waiting time: 1.3075053135510513
+Constraint: 0.6000000000000001
+
+============================================
+Experiment: 100 workers, 400 requests, over duration 100.0 for max waiting time of 0.8 using strategy Random
+============================================
+Total requests: 400
+Total failed requests: 19
+Average waiting time: 0.5407483980554958
+Max waiting time: 1.1893225836961308
+Constraint: 0.8
+
+============================================
+Experiment: 100 workers, 400 requests, over duration 100.0 for max waiting time of 1.0 using strategy Random
+============================================
+Total requests: 400
+Total failed requests: 4
+Average waiting time: 0.6369098497843535
+Max waiting time: 1.260567355574861
+Constraint: 1.0
+
+============================================
+Experiment: 100 workers, 400 requests, over duration 100.0 for max waiting time of 1.2000000000000002 using strategy Random
+============================================
+Total requests: 400
+Total failed requests: 0
+Average waiting time: 0.7477590162681796
+Max waiting time: 1.1943164014246683
+Constraint: 1.2000000000000002
+
+============================================
+Experiment: 100 workers, 400 requests, over duration 100.0 for max waiting time of 1.4000000000000001 using strategy Random
+============================================
+Total requests: 400
+Total failed requests: 0
+Average waiting time: 0.8360512616246697
+Max waiting time: 1.399068171214068
+Constraint: 1.4000000000000001
+Runtime: 0.0mins_22.754597663879395secs

@@ -1,0 +1,73 @@
+
+============================================
+Experiment: 100 workers, 200 requests, over duration 100.0 for max waiting time of 0.0 using strategy HighestRedundancy
+============================================
+Total requests: 200
+Total failed requests: 200
+Average waiting time: 0.1509225118136119
+Max waiting time: 0.9222068655025024
+Constraint: 0.0
+
+============================================
+Experiment: 100 workers, 200 requests, over duration 100.0 for max waiting time of 0.2 using strategy HighestRedundancy
+============================================
+Total requests: 200
+Total failed requests: 46
+Average waiting time: 0.1770950372583949
+Max waiting time: 0.829524153037631
+Constraint: 0.2
+
+============================================
+Experiment: 100 workers, 200 requests, over duration 100.0 for max waiting time of 0.4 using strategy HighestRedundancy
+============================================
+Total requests: 200
+Total failed requests: 1
+Average waiting time: 0.27945698673536673
+Max waiting time: 0.6741937078201373
+Constraint: 0.4
+
+============================================
+Experiment: 100 workers, 200 requests, over duration 100.0 for max waiting time of 0.6000000000000001 using strategy HighestRedundancy
+============================================
+Total requests: 200
+Total failed requests: 0
+Average waiting time: 0.4211348179838755
+Max waiting time: 0.599479244403948
+Constraint: 0.6000000000000001
+
+============================================
+Experiment: 100 workers, 200 requests, over duration 100.0 for max waiting time of 0.8 using strategy HighestRedundancy
+============================================
+Total requests: 200
+Total failed requests: 0
+Average waiting time: 0.5610015285978418
+Max waiting time: 0.799251925486506
+Constraint: 0.8
+
+============================================
+Experiment: 100 workers, 200 requests, over duration 100.0 for max waiting time of 1.0 using strategy HighestRedundancy
+============================================
+Total requests: 200
+Total failed requests: 0
+Average waiting time: 0.70020475151725
+Max waiting time: 0.9996769790638362
+Constraint: 1.0
+
+============================================
+Experiment: 100 workers, 200 requests, over duration 100.0 for max waiting time of 1.2000000000000002 using strategy HighestRedundancy
+============================================
+Total requests: 200
+Total failed requests: 0
+Average waiting time: 0.857531899669869
+Max waiting time: 1.198078299246802
+Constraint: 1.2000000000000002
+
+============================================
+Experiment: 100 workers, 200 requests, over duration 100.0 for max waiting time of 1.4000000000000001 using strategy HighestRedundancy
+============================================
+Total requests: 200
+Total failed requests: 0
+Average waiting time: 0.9501053118950276
+Max waiting time: 1.3958337875173283
+Constraint: 1.4000000000000001
+Runtime: 0.0mins_15.973546981811523secs
